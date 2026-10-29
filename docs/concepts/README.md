@@ -1,0 +1,3 @@
+# Industry 4.0 concepts
+
+OPC UA, MQTT, digital twin, ...

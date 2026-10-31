@@ -89,3 +89,11 @@ sequenceDiagram
 | Which machine takes the job | Machine services (negotiated) |
 | Whether the machine starts and performs the treatment | The machine service that took the job |
 | Whether the product cannot be manufactured | Production-process service |
+
+## Open points
+
+- Define the negotiation deadline, retry limit and the other timing requirements (R6).
+- Specify the machine-service interfaces: job announcement, score exchange, "job taken", withdrawal (R4, R8).
+- Add negotiation for the two transport systems.
+- Map the logical components to `factory-edge-gateway`, `factory-mes-service`, `factory-digital-twin` and `factory-simulation`.
+- Plan availability for the single central computer.

@@ -27,17 +27,17 @@ Machine selection is **decentralized**. Decision authority is distributed as fol
 
 1. The production-process service (one instance per order) announces the treatment job to all machine services. The announcement carries the job parameters, including the customer preference (speed over cost, or cost over speed) and a deadline.
 2. Each machine service computes a score from its own status, cost and speed, weighted by the customer preference, and exchanges it with the other machine services.
-3. All machine services apply the same deterministic rule: the best score wins; ties are broken by machine ID. A machine that is busy or unable does not take part. This guarantees that exactly one machine takes the job when several want it.
-4. The winning machine service reports "job taken" to the production-process service, treats the workpiece through its adapter, and reports the confirmed result.
-5. If no machine takes the job, the negotiation continues until the deadline or retry limit is reached. The production-process service then withdraws the announcement, so no machine can take the job afterwards, and flags the product as not manufacturable.
+3. All machine services apply the same deterministic rule: the best eligible score wins; ties are broken by machine ID. Busy or unable machines report themselves as ineligible. This rule selects a winner only when services use the same complete offer set; the fail-closed agreement protocol in [ADR 0004](0004-fail-closed-machine-negotiation.md) governs when that winner may act.
+4. The winning machine service commits only after every participant confirms the same winner, then reports "job taken" to the production-process service, treats the workpiece through its adapter, and reports the confirmed result (see [ADR 0004](0004-fail-closed-machine-negotiation.md)).
+5. If no machine takes the job before the deadline, the production-process service withdraws the announcement and flags the product as not manufacturable. The deadline is authoritative; retries do not extend it and there is no separate retry limit (see [ADR 0003](0003-soft-real-time-timing-policy.md)).
 
 Several machines wanting the job is normal contention and is resolved by the rule in step 3. It is not a failure. There is no fallback to a central decision by the production-process service.
 
 ## Consequences
 
 - Machine services can be added or removed without changing the production-process service or any selection logic (R7), as long as they follow the protocol.
-- The protocol adds failure modes that must be handled: livelock, stale scores, double assignment, and timeouts.
-- Deadline and retry limit are not yet defined and must be set as part of the timing requirements (R6).
+- The protocol adds failure modes that must be handled: livelock, stale scores, double assignment, and timeouts. [ADR 0004](0004-fail-closed-machine-negotiation.md) defines fail-closed agreement for stale or inconsistent views and double assignment.
+- The per-process negotiation deadline and other timing budgets must be configured and validated against the target installation as described in [ADR 0003](0003-soft-real-time-timing-policy.md).
 - The decentralization is logical only. All services run on one computer, which remains a single point of failure.
 - Safety interlocks and emergency stops stay in the existing control equipment.
 - If the negotiation proves too complex or unreliable, the centralized offer-and-select alternative remains available. Superseding this ADR would be required.

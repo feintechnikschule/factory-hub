@@ -59,6 +59,4 @@ Modules (e.g. a further milling machine or transport system) can be added or rea
 
 ## Next steps
 
-1. Draw a logical component diagram (Mermaid): production-process service, machine services, conveyor service, equipment adapters, digital twin.
-2. Draw a sequence for one workpiece, marking each message, command, confirmation and decision owner.
-3. Record architecture decisions as ADRs in `docs/adr/` (e.g. ownership of machine selection).
+Steps 1–3 (component diagram, sequence, first ADRs) are done; see `docs/architecture/overview.md` and `docs/adr/`. Current decisions and open points are tracked in `docs/status.md`.

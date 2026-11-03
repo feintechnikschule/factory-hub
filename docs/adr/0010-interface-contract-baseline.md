@@ -4,7 +4,7 @@ Status: Proposed; detailed bindings remain undecided.
 
 ## Context
 
-R8 requires well-defined service interfaces. ADR 0006 establishes protocol boundaries but leaves topic names, payload schemas, the OPC UA information model, MQTT quality-of-service settings and internal service-to-service transport open. ADR 0007 further limits OPC UA and MQTT to local software interfaces; neither is assumed on physical equipment.
+R8 requires well-defined service interfaces. ADR 0006 establishes protocol boundaries but leaves topic names, payload schemas, MQTT quality-of-service settings and internal service-to-service transport open. ADR 0007 further limits MQTT (and the then-proposed OPC UA) to local software interfaces; neither is assumed on physical equipment.
 
 The hub repository contains no component implementations or verified equipment signals from which to finalize those bindings. This ADR records a candidate baseline for component-repository design and identifies what still needs agreement. The candidates below are not implementation contracts.
 
@@ -24,7 +24,7 @@ The hub repository contains no component implementations or verified equipment s
 - The MES does not send commands. It only consumes published events and state.
 - Broker access rules (candidate): the twin may publish only to `*/sim/cmd`; each proxy may publish only to its own events and state topics and subscribe only to its own command topic; the MES is subscribe-only.
 - Use MQTT QoS 1 as a candidate for events, state and simulation commands. Consumers must tolerate duplicate delivery, correlate by equipment and event identity, and reject feedback that exceeds the configured age in [ADR 0003](0003-soft-real-time-timing-policy.md). QoS 1 is not exactly-once and does not establish a command or completion guarantee.
-- OPC UA: the gateway-owned virtual equipment model in ADR 0006/0007 is not needed for this event flow. Whether any OPC UA address space is still required (for example for local software clients) is undecided.
+- OPC UA is dropped. MQTT is the only protocol between local software components, so no OPC UA address space or information model is specified. This supersedes the OPC UA parts of [ADR 0006](0006-communication-protocol-boundaries.md) and [ADR 0007](0007-local-machine-proxies-and-legacy-adapters.md).
 - Do not infer a transport for internal service-to-service interactions from the MQTT boundary. Any selected transport must support the job/round correlation, idempotent handling, participant acknowledgements and absolute deadline required by [ADRs 0003](0003-soft-real-time-timing-policy.md) and [0004](0004-fail-closed-machine-negotiation.md).
 
 ## Still undecided
@@ -34,7 +34,6 @@ The following items require agreement in the relevant component repositories bef
 - Whether to adopt the candidate topic pattern, exact equipment identifiers, topic versioning and broker access rules.
 - The concrete payload schema for each asset type, including field names, types, units, enumerations, null/error semantics and compatibility policy.
 - The MQTT QoS, retained-message behavior, session settings and delivery guarantees for each message class.
-- Whether an OPC UA address space is still needed and, if so, its namespace URI, node identifiers and types.
 - Per-machine status container contents and the fixed control set of each machine.
 - The transport and exact interaction contracts for service-to-service negotiation, commands, acknowledgements and results.
 

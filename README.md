@@ -6,7 +6,7 @@ Hub repository for the smart factory project (Industry 4.0). It holds architectu
 - `docs/adr/` – Architecture Decision Records
 - `docs/architecture/` – Architecture and diagrams (Mermaid)
 - `docs/requirements/` – Requirements
-- `docs/concepts/` – Industry 4.0 concepts (OPC UA, MQTT, digital twin, ...)
+- `docs/concepts/` – Industry 4.0 concepts (MQTT, digital twin, ...)
 - `.github/copilot-instructions.md` – Copilot instructions
 - `.github/agents/` – AI agent definitions
 - `ai-notes/` – Saved AI discussions (Markdown exports)

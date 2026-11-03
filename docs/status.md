@@ -21,6 +21,7 @@ Start here when resuming work. Update this file when decisions or open points ch
 | 0007 | Machine services are software proxies on the central computer; adapters connect them to legacy machines; OPC UA and MQTT are local software interfaces only |
 | 0008 | Adapter modes: physical machine connected, or simulation (predefined scenario or operator-driven digital twin); simulated feedback is never physical confirmation |
 | 0009 | Reset to default state on restart; recover confirmed state only if the machine is in default state and not running; transport reset cascades to machines with a carrier at their station; reset proxy means the order starts over |
+| 0010 | Proposed interface contract baseline; detailed bindings remain undecided |
 
 ## Open points
 
@@ -28,7 +29,7 @@ Start here when resuming work. Update this file when decisions or open points ch
 - **Default and idle detection** (ADR 0009): whether each real machine can report "default state and not running". Needs field verification; see the equipment interface inventory.
 - **Equipment interface inventory** (ADR 0007): a preliminary inventory of documented equipment and field-verification questions is in [the inventory](architecture/equipment-interface-inventory.md). Actual controls, sensors and controller interfaces remain unverified; choose adapter technology only after inspection.
 - **Timing values** (ADR 0003): budgets are measured and configured per installation.
-- **Interface contracts** (R8, ADR 0006): topic names, payload schemas, OPC UA information model, MQTT QoS, internal service-to-service transport. Undecided.
+- **Interface contracts** (R8, ADRs 0006 and 0010): a candidate baseline is proposed; topic names, payload schemas, OPC UA information model, MQTT QoS/delivery settings, and internal service-to-service transport still require component-owner agreement.
 - **Failure diagnostics** (ADR 0005): revisit after simulation and real-world tests.
 - **Requirements** (`docs/requirements/`): still empty. R1–R8 live only in the principles doc.
 - **Concepts** (`docs/concepts/`): README is a stub (OPC UA, MQTT, digital twin).

@@ -14,7 +14,7 @@ flowchart LR
     end
 ```
 
-All components and protocol endpoints run on the central computer. OPC UA and MQTT are local software interfaces; they are not assumed to be available on the physical machines. The proxies and legacy-equipment boundary are described in [ADR 0007](../adr/0007-local-machine-proxies-and-legacy-adapters.md). Detailed interface contracts remain to be specified.
+All components and protocol endpoints run on the central computer. OPC UA and MQTT are local software interfaces; they are not assumed to be available on the physical machines. The proxies and legacy-equipment boundary are described in [ADR 0007](../adr/0007-local-machine-proxies-and-legacy-adapters.md). A candidate interface-contract baseline is in [ADR 0010](../adr/0010-interface-contract-baseline.md); its detailed bindings remain undecided.
 
 ### Equipment adapter operational modes
 
@@ -122,7 +122,7 @@ sequenceDiagram
 ## Open points
 
 - Define the negotiation deadline, retry limit and the other timing requirements (R6).
-- Specify the machine-service interfaces: job announcement, score exchange, "job taken", withdrawal (R4, R8).
+- Specify the machine-service interfaces: job announcement, score exchange, "job taken", withdrawal (R4, R8; see proposed baseline in ADR 0010).
 - Add negotiation for the two transport systems.
 - Map the logical components to `factory-edge-gateway`, `factory-mes-service`, `factory-digital-twin` and `factory-simulation`.
 - Plan availability for the single central computer.

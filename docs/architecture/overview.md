@@ -85,7 +85,7 @@ sequenceDiagram
     loop Negotiation rounds until a machine commits or the deadline expires
         M1->>M2: Propose: own status, cost, speed
         M2->>M1: Propose: own status, cost, speed
-        Note over M1,M2: Each service requires the complete offer set and confirms the same winner; only the winner commits after all participants confirm (ADR 0004)
+        Note over M1,M2: Each service requires the complete offer set and confirms the same winner, and only the winner commits after all participants confirm (ADR 0004)
     end
 
     alt A machine takes the job, here M2

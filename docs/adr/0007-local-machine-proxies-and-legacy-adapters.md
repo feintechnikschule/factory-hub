@@ -1,6 +1,6 @@
 # 7. Local machine proxies and legacy equipment adapters
 
-Status: Accepted; adapter operation modes are specified in [ADR 0008](0008-adapter-operational-modes.md).
+Status: Accepted; OPC UA use (below) dropped by [ADR 0010](0010-interface-contract-baseline.md); adapter operation modes are specified in [ADR 0008](0008-adapter-operational-modes.md).
 
 ## Context
 

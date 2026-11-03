@@ -1,6 +1,6 @@
 # 6. Communication protocol boundaries
 
-Status: Accepted; equipment-facing OPC UA boundary superseded by [ADR 0007](0007-local-machine-proxies-and-legacy-adapters.md).
+Status: Accepted; equipment-facing OPC UA boundary superseded by [ADR 0007](0007-local-machine-proxies-and-legacy-adapters.md); OPC UA and the gateway hop dropped by [ADR 0010](0010-interface-contract-baseline.md).
 
 ## Context
 

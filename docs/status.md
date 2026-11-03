@@ -22,10 +22,11 @@ Start here when resuming work. Update this file when decisions or open points ch
 | 0008 | Adapter modes: physical machine connected, or simulation (predefined scenario or operator-driven digital twin); simulated feedback is never physical confirmation |
 | 0009 | Reset to default state on restart; recover confirmed state only if the machine is in default state and not running; transport reset cascades to machines with a carrier at their station; reset proxy means the order starts over |
 | 0010 | Proposed interface contract baseline: MQTT only, OPC UA dropped; two contracts (adapter - proxy; proxy - MQTT broker - twin/MES), no gateway hop, fixed event envelope with variable status container, simulation commands from twin to proxy via per-machine MQTT topic, MES sends no commands; detailed bindings remain undecided |
+| 0011 | Durable checkpoints of confirmed proxy state are required; storage and coordinated order recovery remain undecided |
 
 ## Open points
 
-- **Persistence of proxy state** (ADR 0009): where the confirmed state is stored so it survives a crash. Undecided.
+- **Persistence implementation** (ADR 0011): durable confirmed-state checkpoints are required; storage technology, retention and migration, and coordination with process/order recovery remain undecided.
 - **Default and idle detection** (ADR 0009): whether each real machine can report "default state and not running". Needs field verification; see the equipment interface inventory.
 - **Equipment interface inventory** (ADR 0007): a preliminary inventory of documented equipment and field-verification questions is in [the inventory](architecture/equipment-interface-inventory.md). Actual controls, sensors and controller interfaces remain unverified; choose adapter technology only after inspection.
 - **Timing values** (ADR 0003): budgets are measured and configured per installation.
@@ -37,4 +38,5 @@ Start here when resuming work. Update this file when decisions or open points ch
 ## Working conventions
 
 - Decisions go in `docs/adr/` as the next numbered ADR; use Mermaid for diagrams.
+- New or edited Mermaid flowcharts use top-down `flowchart TD`, not left-right `flowchart LR`.
 - Changes go through pull requests on a branch.

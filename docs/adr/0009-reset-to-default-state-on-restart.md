@@ -38,7 +38,7 @@ Safety interlocks and emergency stops remain in the existing control equipment a
 
 ## Open points
 
-- **Persistence:** recovering a proxy's confirmed state requires that this state survives the crash. Whether and where it is persisted is not decided. Without persistence every restart resets all proxies and orders.
+- **Persistence:** [ADR 0011](0011-persistent-proxy-state.md) requires a durable checkpoint of confirmed proxy state. The storage technology and coordinated persistence and recovery of process/order state remain undecided.
 - **Default and idle detection:** the adapter must be able to read "default state and not running" from each physical machine. Whether this is possible per machine has to be established in the equipment interface inventory (ADR 0007). Machines that cannot report it are always reset.
 
 ## Consequences

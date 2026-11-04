@@ -1,6 +1,6 @@
 # 11. Persistent confirmed proxy state
 
-Status: Accepted; storage and coordinated order recovery remain undecided.
+Status: Accepted; coordinated order recovery remains undecided.
 
 ## Context
 
@@ -18,11 +18,10 @@ Status: Accepted; storage and coordinated order recovery remain undecided.
 
 ## Still undecided
 
-- The storage technology, location, retention policy and checkpoint migration strategy.
-- How process/order state is persisted and coordinated with proxy recovery.
+- How process/order state is persisted and coordinated with proxy recovery. Proxy storage, checkpoint retention and schema migration are specified in [ADR 0012](0012-proxy-checkpoint-storage.md).
 
 ## Consequences
 
 - Proxy recovery has a technology-independent durability requirement without assuming that persisted state is current equipment feedback.
 - Implementations must fail closed when a usable checkpoint or the independent equipment verification required by ADR 0009 is unavailable.
-- Component repositories must agree on storage and coordinated order-recovery details before relying on them.
+- Component repositories must implement the storage requirements in ADR 0012 and agree on coordinated order-recovery details before relying on automatic recovery.

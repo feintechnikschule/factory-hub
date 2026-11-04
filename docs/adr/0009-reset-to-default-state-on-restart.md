@@ -36,9 +36,9 @@ All services run on one central computer, which is a physical single point of fa
 
 Safety interlocks and emergency stops remain in the existing control equipment and are never bypassed by recovery.
 
-## Open points
+## Remaining open points
 
-- **Persistence:** recovering a proxy's confirmed state requires that this state survives the crash. Whether and where it is persisted is not decided. Without persistence every restart resets all proxies and orders.
+- **Persistence:** the durable local persistence and fail-closed recovery requirements for confirmed proxy state are defined in [ADR 0011](0011-persist-confirmed-proxy-state.md).
 - **Default and idle detection:** the adapter must be able to read "default state and not running" from each physical machine. Whether this is possible per machine has to be established in the equipment interface inventory (ADR 0007). Machines that cannot report it are always reset.
 
 ## Consequences

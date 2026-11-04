@@ -1,7 +1,7 @@
 # Architecture overview
 
 ```mermaid
-flowchart LR
+flowchart TD
     Physical[Legacy physical machines and controls]
     Physical <-->|Machine-specific adapter interface| Edge
     subgraph Central[Central computer]
@@ -21,7 +21,7 @@ All components and protocol endpoints run on the central computer. MQTT is a loc
 Each adapter operates either with its physical machine connected or in disconnected simulation mode. In simulation mode, it uses one feedback source: a predefined simulated situation or operator-generated feedback from the digital twin. In every mode, commands and feedback pass through the adapter to the machine proxy. Simulated feedback is not physical sensor confirmation (see [ADR 0008](../adr/0008-adapter-operational-modes.md)).
 
 ```mermaid
-flowchart LR
+flowchart TD
     Proxy[Machine proxy] -->|Command| Adapter[Equipment adapter]
     Adapter -->|Feedback| Proxy
 

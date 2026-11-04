@@ -22,19 +22,19 @@ Start here when resuming work. Update this file when decisions or open points ch
 | 0008 | Adapter modes: physical machine connected, or simulation (predefined scenario or operator-driven digital twin); simulated feedback is never physical confirmation |
 | 0009 | Reset to default state on restart; recover confirmed state only if the machine is in default state and not running; transport reset cascades to machines with a carrier at their station; reset proxy means the order starts over |
 | 0010 | Proposed interface contract baseline: MQTT only, OPC UA dropped; two contracts (adapter - proxy; proxy - MQTT broker - twin/MES), no gateway hop, fixed event envelope with variable status container, simulation commands from twin to proxy via per-machine MQTT topic, MES sends no commands; detailed bindings remain undecided |
+| 0011 | Persist each proxy's latest confirmed state atomically to durable local storage before reporting success; fail closed if persistence or restart verification fails |
 
 ## Open points
 
-- **Persistence of proxy state** (ADR 0009): where the confirmed state is stored so it survives a crash. Undecided.
 - **Default and idle detection** (ADR 0009): whether each real machine can report "default state and not running". Needs field verification; see the equipment interface inventory.
-- **Equipment interface inventory** (ADR 0007): a preliminary inventory of documented equipment and field-verification questions is in [the inventory](architecture/equipment-interface-inventory.md). Actual controls, sensors and controller interfaces remain unverified; choose adapter technology only after inspection.
+- **Equipment field verification** (ADR 0007): a preliminary inventory of documented equipment and field-verification questions is in [the inventory](architecture/equipment-interface-inventory.md). Actual controls, sensors and controller interfaces remain unverified; choose adapter technology only after inspection.
 - **Timing values** (ADR 0003): budgets are measured and configured per installation.
-- **Interface contracts** (R8, ADRs 0006 and 0010): a candidate baseline is proposed (direct proxy-to-broker MQTT, no gateway; simulation command topic per machine; MES subscribe-only). Topic names, payload schemas, QoS/delivery settings, broker access rules, and the internal service-to-service transport (including job handover from the process service) still require agreement. Also decide whether `factory-edge-gateway` is removed or reduced to broker operation.
+- **Interface bindings** (R8, ADRs 0006 and 0010): the candidate baseline (direct proxy-to-broker MQTT, no gateway hop; simulation command topic per machine; MES subscribe-only) is documented. Topic names, payload schemas, QoS/delivery settings, broker access rules, and the internal service-to-service transport (including job handover from the process service) still require agreement. Also decide whether `factory-edge-gateway` is removed or reduced to broker operation.
 - **Failure diagnostics** (ADR 0005): revisit after simulation and real-world tests.
 - **Requirements** (`docs/requirements/`): still empty. R1–R8 live only in the principles doc.
 - **Concepts** (`docs/concepts/`): README is a stub (MQTT, digital twin).
 
 ## Working conventions
 
-- Decisions go in `docs/adr/` as the next numbered ADR; use Mermaid for diagrams.
+- Decisions go in `docs/adr/` as the next numbered ADR. Use Mermaid for diagrams and `flowchart TD` for top-down flowcharts.
 - Changes go through pull requests on a branch.

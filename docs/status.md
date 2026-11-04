@@ -6,7 +6,8 @@ Start here when resuming work. Update this file when decisions or open points ch
 
 1. `docs/concepts/industrie-4-0-principles.md` – principles, requirements R1–R8, constraints
 2. `docs/architecture/overview.md` – diagrams (protocols, adapter modes, components, sequence)
-3. `docs/adr/` – decisions below
+3. `docs/architecture/implementation-proposal.md` – proposed simulated vertical slice
+4. `docs/adr/` – decisions below
 
 ## Decisions (ADRs)
 
@@ -26,7 +27,7 @@ Start here when resuming work. Update this file when decisions or open points ch
 
 ## Open points
 
-- **Persistence implementation** (ADR 0011): durable confirmed-state checkpoints are required; storage technology, retention and migration, and coordination with process/order recovery remain undecided.
+- **Checkpoint requirement and recovery** (ADR 0011): confirmed-state checkpoints are required by the accepted ADR, but this proposal recommends revisiting that requirement after the simulated vertical slice establishes the proxy state model. No storage technology is selected.
 - **Default and idle detection** (ADR 0009): whether each real machine can report "default state and not running". Needs field verification; see the equipment interface inventory.
 - **Equipment field verification** (ADR 0007): a preliminary inventory of documented equipment and field-verification questions is in [the inventory](architecture/equipment-interface-inventory.md). Actual controls, sensors and controller interfaces remain unverified; choose adapter technology only after inspection.
 - **Timing values** (ADR 0003): budgets are measured and configured per installation.
@@ -34,6 +35,7 @@ Start here when resuming work. Update this file when decisions or open points ch
 - **Failure diagnostics** (ADR 0005): revisit after simulation and real-world tests.
 - **Requirements** (`docs/requirements/`): still empty. R1–R8 live only in the principles doc.
 - **Concepts** (`docs/concepts/`): README is a stub (MQTT, digital twin).
+- **Implementation direction:** the simulated single-order vertical slice is proposed in [the implementation proposal](architecture/implementation-proposal.md); its sequence and scope have not yet been accepted as an implementation commitment.
 
 ## Working conventions
 

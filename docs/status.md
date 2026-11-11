@@ -6,7 +6,7 @@ Start here when resuming work. Update this file when decisions or open points ch
 
 1. `docs/concepts/industrie-4-0-principles.md` – principles, requirements R1–R8, constraints
 2. `docs/architecture/overview.md` – diagrams (protocols, adapter modes, components, sequence)
-3. `docs/architecture/implementation-proposal.md` – proposed simulated vertical slice
+3. `docs/architecture/implementation-proposal.md` – agreed simulated vertical-slice sequence
 4. `docs/adr/` – decisions below
 
 ## Decisions (ADRs)
@@ -23,11 +23,11 @@ Start here when resuming work. Update this file when decisions or open points ch
 | 0008 | Adapter modes: physical machine connected, or simulation (predefined scenario or operator-driven digital twin); simulated feedback is never physical confirmation |
 | 0009 | Reset to default state on restart; recover confirmed state only if the machine is in default state and not running; transport reset cascades to machines with a carrier at their station; reset proxy means the order starts over |
 | 0010 | Proposed interface contract baseline: MQTT only, OPC UA dropped; two contracts (adapter - proxy; proxy - MQTT broker - twin/MES), no gateway hop, fixed event envelope with variable status container, simulation commands from twin to proxy via per-machine MQTT topic, MES sends no commands; detailed bindings remain undecided |
-| 0011 | Durable checkpoints of confirmed proxy state are required; storage and coordinated order recovery remain undecided |
+| 0011 | Atomic durable snapshots before reporting confirmed transitions; persistence failures stop further work; storage and coordinated order recovery remain undecided |
 
 ## Open points
 
-- **Checkpoint requirement and recovery** (ADR 0011): confirmed-state checkpoints are required by the accepted ADR, but this proposal recommends revisiting that requirement after the simulated vertical slice establishes the proxy state model. No storage technology is selected.
+- **Persistence implementation** (ADR 0011): durable confirmed-state snapshots and fail-closed persistence are required, including in the simulated slice. Storage technology, retention and migration, and coordination with process/order recovery remain undecided.
 - **Default and idle detection** (ADR 0009): whether each real machine can report "default state and not running". Needs field verification; see the equipment interface inventory.
 - **Equipment field verification** (ADR 0007): a preliminary inventory of documented equipment and field-verification questions is in [the inventory](architecture/equipment-interface-inventory.md). Actual controls, sensors and controller interfaces remain unverified; choose adapter technology only after inspection.
 - **Timing values** (ADR 0003): budgets are measured and configured per installation.
@@ -35,7 +35,7 @@ Start here when resuming work. Update this file when decisions or open points ch
 - **Failure diagnostics** (ADR 0005): revisit after simulation and real-world tests.
 - **Requirements** (`docs/requirements/`): still empty. R1–R8 live only in the principles doc.
 - **Concepts** (`docs/concepts/`): README is a stub (MQTT, digital twin).
-- **Implementation direction:** the simulated single-order vertical slice is proposed in [the implementation proposal](architecture/implementation-proposal.md); its sequence and scope have not yet been accepted as an implementation commitment.
+- **Implementation direction:** the simulated single-order vertical slice and follow-on sequence are agreed in [the implementation proposal](architecture/implementation-proposal.md). Code will live in `feintechnikschule/factory-implementation`.
 
 ## Working conventions
 

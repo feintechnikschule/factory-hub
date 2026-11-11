@@ -38,7 +38,7 @@ Safety interlocks and emergency stops remain in the existing control equipment a
 
 ## Remaining open points
 
-- **Persistence:** [ADR 0011](0011-persistent-proxy-state.md) requires a durable checkpoint of confirmed proxy state. The storage technology and coordinated persistence and recovery of process/order state remain undecided.
+- **Persistence:** [ADR 0011](0011-persist-confirmed-proxy-state.md) requires a durable checkpoint of confirmed proxy state. The storage technology and coordinated persistence and recovery of process/order state remain undecided.
 - **Default and idle detection:** the adapter must be able to read "default state and not running" from each physical machine. Whether this is possible per machine has to be established in the equipment interface inventory (ADR 0007). Machines that cannot report it are always reset.
 
 ## Consequences
